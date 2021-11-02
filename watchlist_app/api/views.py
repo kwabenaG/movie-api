@@ -41,7 +41,7 @@ class StreamPlatform(APIView):
 
 
 
-class StreamPlatformList(APIView):
+class StreamPlatformDetailView(APIView):
     
     # stream platform must be in the list
     def get(self, request, pk):
@@ -74,20 +74,20 @@ class WatchListView(APIView):
 class WatchListDetailView(APIView):
     def get(self, request, pk):
         try:
-            movie = WatchList.objects.get(pk=pk)
+            watchlist = WatchList.objects.get(pk=pk)
         except WatchList.DoesNotExist:
             return Response({"error":"Movie Detail do not exit"}, status=404)
         
-        serializer = WatchListSerializer(movie)
+        serializer = WatchListSerializer(watchlist)
         return Response(serializer.data)
 
     def put(self, request, pk):
         try:
-            movie = WatchListSerializer.objects.get(pk=pk)
+            watchlist = WatchListSerializer.objects.get(pk=pk)
         except WatchListSerializer.DoesNotExist:
             return Response({'error': "No such item"}, status=404)
 
-        serializer = WatchListSerializer(movie, data=request.data)
+        serializer = WatchListSerializer(watchlist, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=201)
