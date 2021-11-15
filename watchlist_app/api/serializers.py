@@ -4,6 +4,8 @@ from rest_framework import serializers
 # import movie models
 from watchlist_app.models import WatchList, StreamPlatform
 
+
+
 #movie serializers
 class WatchListSerializer(serializers.ModelSerializer):
    
